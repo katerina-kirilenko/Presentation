@@ -1,0 +1,97 @@
+p {
+  text-align: justify;
+  font-size: 28px;
+}
+
+.reveal p {
+  line-height: 1.4;
+}
+
+.reveal section img {
+  margin: 0;
+  background: transparent;
+  border: transparent;
+  box-shadow: none;
+}
+
+.big-title {
+  color: rgb(241, 101, 41);
+  font-size: 46px;
+  font-weight: 900;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.middle-title {
+  color: #13daec;
+  font-size: 46px;
+  font-weight: 900;
+  text-align: center;
+}
+
+.main .big-title {
+  margin: 0;
+  text-transform: none;
+}
+
+.main .middle-title {
+  margin: 0;
+  font-size: 36px;
+  color: #fff;
+}
+
+.main .middle-title::after,
+.main .middle-title::before {
+  content: "\2015";
+  font-size: 35px;
+  padding: 10px;
+}
+
+.code {
+  background-color: #272822;
+  padding: 5px 20px;
+}
+
+.code p, .code pre  {
+  font-size: 20px;
+  line-height: 20px;
+  color: #f8f8f2;
+  font-family: "Courier New", Courier, monospace;
+  box-shadow: none;
+}
+
+code {
+  padding: 2px 4px;
+  font-size: 100%;
+  color: #444;
+  background-color: #f1f0ea;
+  border-radius: 4px;
+}
+
+.code-green {
+  color: #7ec699;
+}
+
+.code-orange {
+  color: #f08d49;
+}
+
+.code-violet {
+  color: #cc99cd;
+}
+
+.code-sky {
+  color: #67cdcc;
+}
+
+.comment {
+  color: #999;
+}
+
+.navigate-history p {
+  margin: 15px 0;
+}
+
+.history-api p, .routing p {
+  text-align: center;
+}
