@@ -1,47 +1,181 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <title>reveal.js</title>
+		<title>reveal.js</title>
 
-    <link rel="stylesheet" href="dist/reset.css" />
-    <link rel="stylesheet" href="dist/reveal.css" />
-    <link rel="stylesheet" href="dist/theme/black.css" id="theme" />
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css" id="theme">
+		<link rel="stylesheet" href="dist/user-styles.css" />
 
-    <!-- Theme used for syntax highlighted code -->
-    <link
-      rel="stylesheet"
-      href="plugin/highlight/monokai.css"
-      id="highlight-theme"
-    />
-  </head>
-  <body>
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
+	</head>
+	<body>
     <div class="reveal">
-      <div class="slides">
-        <section>Slide 1</section>
-        <section>Slide 2</section>
+      <div class="slides">	
+
+        <section class="main">
+					<img src="./dist/img/1200px-HTML5_logo_and_wordmark.svg.png" alt="html" width="200">
+					<p class="big-title">History API</p>
+					<p class="middle-title">and</p>
+					<p class="big-title">Routing</p>
+        </section>
+        
+        <section>
+          <section class="history-api">
+            <p class="big-title">The History API</p>
+						<img src="./dist/img/adres_str.png" alt="" width="650px">
+						<p>The History API lets you <b>interact with the browser history, trigger the browser navigation methods and change the address bar content.</b></p>
+					</section>
+          <section>
+            <p>The History API was introduced in HTML5 and is now supported by all modern browsers.</p>
+            <img src="./dist/img/support.png" alt="" width="750">
+          </section>
+          <section>
+            <p class="middle-title">Access the History API</p>
+            <p>The History API is available on the <code>object</code>, so you can call it like this: <code>window.history</code> or <code>history</code>, since <code>window</code> is the global object.</p>
+            <img src="./dist/img/history-object.png" alt="" width="750">
+          </section>
+          <section class="navigate-history">
+            <p class="middle-title">Navigate the history</p>
+            <p>Go back to the previous page:</p>
+            <div class="code">              
+              <p>history.<span class="code-orange">back()</span></p>
+            </div>
+            <p>You can forward to the next page using</p>
+            <div class="code">              
+              <p>history.<span class="code-orange">forward()</span></p>
+            </div>
+            <p><code>go(n)</code> lets you navigate back or forward multiple levels deep. For example</p>
+            <div class="code">
+              <p>&nbsp; history.<span class="code-orange">go(-1)</span>
+                  <span class="comment">//equivalent to history.back()</p>
+              <p>&nbsp; history.<span class="code-orange">go(1)</span>
+                  <span class="comment">//equivalent to history.forward()</span></p>              
+            </div>
+          <p>To know how many entries there are in the history, you can call</p>
+          <div class="code">
+            <p>history.<span class="code-orange">length</span></p>
+          </div>
+          </section>
+          <section>
+            <p class="middle-title">Add an entry to the history</p>
+            <p>Using <code>pushState()</code> you can create a new history entry programmatically.</p>
+            <div class="code">
+              <p><span class="code-violet">const</span> state <span class="code-sky">=</span> { name: <span class="code-green">'Flavio'</span> }</p> 
+              <p>history.<span class="code-orange">pushState</span>(state, <span class="code-green">''</span>, <span class="code-green">'/user'</span>)</p>              
+            </div>
+          </section>
+          <section>
+            <p class="middle-title">Modify history entries</p>
+            <p>While <code>pushState()</code> lets you add a new state to the history, <code>replaceState()</code> allows you to edit the current history state.</p>
+            <div class="code">
+              <p>history.<span class="code-orange">pushState</span>({}, <span class="code-green">''</span>, <span class="code-green">'/posts'</span>)</p>
+              <p><span class="code-violet">const</span> state <span class="code-sky">=</span> { post: <span class="code-green">'first'</span> }</p>
+              <p>history.<span class="code-orange">pushState</span>(state, <span class="code-green">''</span>, <span class="code-green">'/post/first'</span>)</p>
+              <p><span class="code-violet">const</span> state <span class="code-sky">=</span> { post: <span class="code-green">'second'</span> }</p>
+              <p>history.<span class="code-orange">replaceState</span>(state, <span class="code-green">''</span>, <span class="code-green">'/post/second'</span>)</p>
+            </div>
+          </section>
+          <section>
+            <p class="middle-title">Access the current history entry state</p>
+            <p>Accessing the property</p>
+            <div class="code"><p>history.<span class="code-orange">state</span></p></div>
+            <p>returns the current state object (the first parameter passed to <code>pushState</code> or <code>replaceState</code>).</p>
+          </section>
+          <section>
+            <p class="middle-title">The <code>onpopstate</code> event</p>
+            <p>This event is called on window every time the active history state changes, with the current state as the callback parameter:</p>
+            <div class="code">
+              <pre>
+window.<span class="code-orange">onpopstate</span> <span class="code-sky">=</span> event <span class="code-sky">=></span> {
+  console.<span class="code-orange">log</span>(event.state)
+}             </pre>
+            </div>
+            <p>will log the new state object (the first parameter passed to <code>pushState</code> or <code>replaceState</code>) every time you call <code>history.back()</code>, <code>history.forward()</code> or <code>history.go()</code>.</p>
+          </section>          
+        </section>
+
+        <section>
+          <section class="routing">
+            <p class="big-title routing">Routing</p>
+            <p>Router is one of the must-have parts of single page application.</p>
+            <p>Router knows how to tweak the content of the address bar and notifies the rest of the system for URL changes.</p>
+          </section>
+          <section>
+            <p class="middle-title">Methods of routing</p>
+            <ul>
+              <li>Hash-based routing</li>
+              <li>Routing with pushState</li>
+          </ul>
+          </section>
+          <section>
+            <p class="middle-title">Hash-based routing</p>
+            <p>What we meant by hash-based routing is using the anchor part of the URL to simulate different content. For example <code>http://mysite.com/#/products/list</code> leads to displaying a list of products.</p>
+            <img src="./dist/img/list_str.png" alt="" width="750px">
+            <p>The routing is possible because changes in the hash don’t trigger page reload.</p>
+          </section>
+          <section>
+            <p class="middle-title">Reading the route</p>
+            <img src="./dist/img/content_str.png" alt="" width="600px">
+            <p>To read the anchor bit from the URL we may use the following code</p> 
+            <div class="code">
+              <p><span class="code-sky">var</span> hash <span class="code-violet">=</span> window.location.hash;</p>
+              <p><span class="comment">// or extracting the hash from the entire URL</span></p>
+              <p><span class="code-sky">var</span> hash <span class="code-violet">=</span> window.location.href.<span class="code-orange">split</span>(<span class="code-green">'#'</span>)[1] || <span class="code-green">''</span>;</p>
+            </div>
+          </section>
+          <section>
+            <p class="middle-title">Changing the path</p>
+            <p>The following helper will update the URL without firing a new request</p>  
+            <div class="code">            
+              <pre>
+<span class="code-sky">var</span> navigate <span class="code-violet">=</span> <span class="code-sky">function</span> (path) {
+<span class="code-sky">var</span> current <span class="code-violet">=</span> window.location.href;
+  window.location.href <span class="code-violet">=</span> current.<span class="code-orange">replace</span>(<span class="code-violet">/#(.*)$/</span>, <span class="code-green">''</span>) + <span class="code-green">'#'</span> + path;
+}
+
+navigate(<span class="code-green">'rs-school'</span>);
+              </pre>         
+            </div>
+            <br>
+            <img src="./dist/img/rs-school_str.png" alt="" width="750"> 
+          </section>
+          <section>
+            <p class="middle-title">A routing revolution with pushState</p>
+            <p>Now we do not need to use a <code>#</code>. We use a <code>pushState()</code> method to manipulate the history of the browser.</p>
+            <div class="code">
+              <p><span class="code-sky">var</span> stateObj <span class="code-violet">=</span> { foo: <span class="code-green">"bar"</span> };</p>
+              <p>history.<span class="code-orange">pushState</span>(stateObj, <span class="code-green">"page 2"</span>, <span class="code-green">"bar.html"</span>);</p>
+            </div>
+            <p>To use this method for routing we need to make redirect from each route to index.html in our server.</p>
+          </section>
+        </section>
+
+        <section>
+          <p class="middle-title">As a summary I would like to say that with  HTML 5 history API our application to look & act like proper, server-rendered sites as much as possible, especially with minimal effort.</p>
+        </section>
       </div>
     </div>
 
-    <script src="dist/reveal.js"></script>
-    <script src="plugin/notes/notes.js"></script>
-    <script src="plugin/markdown/markdown.js"></script>
-    <script src="plugin/highlight/highlight.js"></script>
-    <script>
-      // More info about initialization & config:
-      // - https://revealjs.com/initialization/
-      // - https://revealjs.com/config/
-      Reveal.initialize({
-        hash: true,
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
 
-        // Learn about plugins: https://revealjs.com/plugins/
-        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
-      });
-    </script>
-  </body>
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
 </html>
